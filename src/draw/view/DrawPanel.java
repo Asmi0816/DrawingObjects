@@ -15,6 +15,7 @@ public class DrawPanel extends JPanel
 	private SpringLayout baseLayout;
 	private JButton rectangleButton, triangleButton, ellipseButton, circleButton, polygonButton, reset;
 	private ShapePanel recPanel;
+	private GraphPanel graphPanel;
 	
 	
 	public DrawPanel(DrawController baseController)
@@ -24,13 +25,14 @@ public class DrawPanel extends JPanel
 		baseLayout = new SpringLayout();
 		rectangleButton = new JButton("Rectangle");
 		triangleButton = new JButton("Triangle");
-		
+	
 		ellipseButton = new JButton("Ellipse");
 		reset = new JButton("Reset");
-		
-		polygonButton = new JButton("Polygon");
 	
+		polygonButton = new JButton("Polygon");
 		recPanel = new ShapePanel(baseController);
+		graphPanel = new GraphPanel(setupArray());
+		
 		circleButton = new JButton("Circle");
 		
 		
@@ -46,9 +48,11 @@ public class DrawPanel extends JPanel
 		this.add(rectangleButton);
 		this.add(triangleButton);
 		this.add(circleButton);
+	
 		this.add(ellipseButton);
 		this.add(polygonButton);
 		this.add(reset);
+		this.add(graphPanel);
 		this.add(recPanel);
 	}
 	
@@ -57,9 +61,6 @@ public class DrawPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.NORTH, rectangleButton, 450, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, rectangleButton, 30, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, recPanel, 10, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, recPanel, -688, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, recPanel, 937, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, recPanel, 0, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.WEST, triangleButton, 0, SpringLayout.WEST, rectangleButton);
 		baseLayout.putConstraint(SpringLayout.SOUTH, triangleButton, -15, SpringLayout.NORTH, rectangleButton);
 		baseLayout.putConstraint(SpringLayout.WEST, ellipseButton, 0, SpringLayout.WEST, rectangleButton);
@@ -68,6 +69,16 @@ public class DrawPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.SOUTH, circleButton, -6, SpringLayout.NORTH, triangleButton);
 		baseLayout.putConstraint(SpringLayout.WEST, polygonButton, 0, SpringLayout.WEST, rectangleButton);
 		baseLayout.putConstraint(SpringLayout.SOUTH, polygonButton, -6, SpringLayout.NORTH, ellipseButton);
+		baseLayout.putConstraint(SpringLayout.WEST, recPanel, -690, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, recPanel, 579, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, recPanel, -37, SpringLayout.EAST, this);
+		
+		baseLayout.putConstraint(SpringLayout.WEST, reset, 0, SpringLayout.WEST, rectangleButton);
+		
+		baseLayout.putConstraint(SpringLayout.NORTH, graphPanel, 600, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, graphPanel, 310, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, graphPanel, -100, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, graphPanel, -40, SpringLayout.EAST, this);
 		
 	}
 	
@@ -126,5 +137,19 @@ public class DrawPanel extends JPanel
 			}
 		}
 		);	
+		
+		
+	}
+	
+	public int [] setupArray()
+	{
+		int length = (int) (Math.random() * 10) + 3;
+		int [] randomArray = new int[length];
+		for(int index = 0; index < length; index++)
+		{
+			randomArray [index] = (int) (Math.random() * 50) + 3;
+		}
+		return randomArray;
+		
 	}
 }
